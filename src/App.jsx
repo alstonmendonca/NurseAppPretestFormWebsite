@@ -43,14 +43,63 @@ function App() {
         throw new Error('Failed to assign participant credentials. Please try again.')
       }
 
-      // Store the form data (optional - if you want to save the pretest responses)
+      // Store the form data with all the new pretest response fields
       const { error: insertError } = await supabase
         .from('pretest_responses')
         .insert({
           participant_number: participants.participant_number,
-          how_was_day: formData.howWasDay,
-          how_do_you_feel: formData.howDoYouFeel,
-          additional_comments: formData.additionalComments,
+          // Eligibility & Consent
+          is_registered_nurse: formData.isRegisteredNurse,
+          provides_consent: formData.providesConsent,
+          understands_voluntary: formData.understandsVoluntary,
+          
+          // WHO-5 Well-Being Index
+          who5_cheerful: parseInt(formData.who5_cheerful),
+          who5_calm: parseInt(formData.who5_calm),
+          who5_active: parseInt(formData.who5_active),
+          who5_rested: parseInt(formData.who5_rested),
+          who5_interested: parseInt(formData.who5_interested),
+          
+          // PSS-4 Perceived Stress
+          pss4_unable_control: parseInt(formData.pss4_unable_control),
+          pss4_confident_handle: parseInt(formData.pss4_confident_handle),
+          pss4_going_your_way: parseInt(formData.pss4_going_your_way),
+          pss4_difficulties_piling: parseInt(formData.pss4_difficulties_piling),
+          
+          // Brief COPE - Active Coping
+          cope_concentrating_efforts: parseInt(formData.cope_concentrating_efforts),
+          cope_taking_action: parseInt(formData.cope_taking_action),
+          
+          // Brief COPE - Planning
+          cope_strategy: parseInt(formData.cope_strategy),
+          cope_thinking_steps: parseInt(formData.cope_thinking_steps),
+          
+          // Brief COPE - Positive Reframing
+          cope_different_light: parseInt(formData.cope_different_light),
+          cope_looking_good: parseInt(formData.cope_looking_good),
+          
+          // Brief COPE - Acceptance
+          cope_accepting_reality: parseInt(formData.cope_accepting_reality),
+          cope_learning_live: parseInt(formData.cope_learning_live),
+          
+          // Brief COPE - Emotional Support
+          cope_emotional_support: parseInt(formData.cope_emotional_support),
+          cope_comfort_understanding: parseInt(formData.cope_comfort_understanding),
+          
+          // Brief COPE - Self-Distraction
+          cope_work_activities: parseInt(formData.cope_work_activities),
+          cope_movies_tv_reading: parseInt(formData.cope_movies_tv_reading),
+          
+          // Brief COPE - Self-Blame
+          cope_criticizing_myself: parseInt(formData.cope_criticizing_myself),
+          cope_blaming_myself: parseInt(formData.cope_blaming_myself),
+          
+          // Burnout Assessment
+          burnout_level: formData.burnout_level,
+          
+          // Additional Comments
+          additional_comments: formData.additional_comments,
+          
           submitted_at: new Date().toISOString()
         })
 

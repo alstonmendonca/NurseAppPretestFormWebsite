@@ -24,7 +24,7 @@ const SuccessPage = ({ participantData }) => {
             Pretest Submitted Successfully!
           </h1>
           <p className="text-gray-600">
-            Your responses have been recorded. Here are your login credentials for the main assessment.
+            Your responses have been recorded. Here are your login credentials for the App.
           </p>
         </div>
 
@@ -98,9 +98,9 @@ const SuccessPage = ({ participantData }) => {
             <h3 className="text-lg font-medium text-gray-900 mb-3">Next Steps</h3>
             <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700">
               <li>Save these credentials in a secure location (write them down or screenshot this page)</li>
-              <li>Navigate to the main assessment application</li>
+              <li>Navigate to the SHANTHI application</li>
               <li>Sign in using the participant number and password provided above</li>
-              <li>Complete the main assessment when you're ready</li>
+              <li>Use the app for relaxation and learning</li>
             </ol>
           </div>
 
