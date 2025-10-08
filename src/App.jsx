@@ -33,10 +33,16 @@ function App() {
         throw new Error('No available participant slots found. Please contact the administrator.')
       }
 
-      // Update the participant record to mark it as used
+      // Randomly assign participant to Intervention or Control group
+      const assignedGroup = Math.random() < 0.5 ? 'Intervention' : 'Control'
+
+      // Update the participant record to mark it as used and assign group
       const { error: updateError } = await supabase
         .from('participants')
-        .update({ id_used: true })
+        .update({ 
+          id_used: true,
+          Group: assignedGroup
+        })
         .eq('participant_number', participants.participant_number)
 
       if (updateError) {
@@ -111,7 +117,8 @@ function App() {
       // Set the participant data to show on success page
       setParticipantData({
         participant_number: participants.participant_number,
-        password: participants.participant_password
+        password: participants.participant_password,
+        group: assignedGroup
       })
 
     } catch (err) {
