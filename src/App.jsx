@@ -119,7 +119,6 @@ function App() {
         .from('demographic_surveys')
         .insert({
           participant_id: participants.participant_number,
-          sample_code: formData.sampleCode,
           age_group: formData.ageGroup,
           gender: formData.gender,
           marital_status: formData.maritalStatus,

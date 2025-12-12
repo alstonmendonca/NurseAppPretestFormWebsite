@@ -8,7 +8,6 @@ const PretestForm = ({ onSubmit, isSubmitting }) => {
     understandsVoluntary: false,
     
     // Demographics Survey
-    sampleCode: '',
     ageGroup: '',
     gender: '',
     maritalStatus: '',
@@ -184,23 +183,6 @@ const PretestForm = ({ onSubmit, isSubmitting }) => {
             </p>
 
             <div className="space-y-6">
-              {/* Sample Code */}
-              <div>
-                <label htmlFor="sampleCode" className="block text-sm sm:text-base font-medium text-gray-700 mb-2">
-                  Sample code No <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="sampleCode"
-                  name="sampleCode"
-                  value={formData.sampleCode}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Enter your sample code"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
-                />
-              </div>
-
               {/* Age Group */}
               <div>
                 <label className="block text-sm sm:text-base font-medium text-gray-700 mb-3">
