@@ -517,7 +517,7 @@ const PretestForm = ({ onSubmit, isSubmitting }) => {
                   <div>
                     <span className="text-sm sm:text-base text-gray-700 font-medium">Non-Sharing Pledge <span className="text-red-500">*</span></span>
                     <p className="text-sm text-gray-600 mt-1">
-                      I agree that I will not share the mobile app access and login details with colleagues from other wards or study groups. I understand that sharing intervention details may affect the reliability of the study findings.
+                      I agree that I will not share the mobile app access and login details (if assigned to Intervention group) with colleagues from other wards or study groups. I understand that sharing intervention details may affect the reliability of the study findings.
                     </p>
                   </div>
                 </label>
@@ -902,7 +902,7 @@ const PretestForm = ({ onSubmit, isSubmitting }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 px-6 rounded-lg font-semibold text-base sm:text-lg hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="w-full bg-gray-900 text-white py-4 px-6 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center">
