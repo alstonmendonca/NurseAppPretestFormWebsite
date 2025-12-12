@@ -114,6 +114,34 @@ function App() {
         console.warn('Failed to save pretest responses:', insertError)
       }
 
+      // Save demographic survey data to demographic_surveys table
+      const { error: demographicError } = await supabase
+        .from('demographic_surveys')
+        .insert({
+          participant_id: participants.participant_number,
+          sample_code: formData.sampleCode,
+          age_group: formData.ageGroup,
+          gender: formData.gender,
+          marital_status: formData.maritalStatus,
+          educational_qualification: formData.educationalQualification,
+          educational_other: formData.educationalQualification === 'Others' ? formData.educationalOther : null,
+          designation: formData.designation,
+          income_level: formData.incomeLevel,
+          years_experience: formData.yearsExperience,
+          working_unit: formData.workingUnit,
+          working_unit_other: formData.workingUnit === 'Any other' ? formData.workingUnitOther : null,
+          work_shift: formData.workShift,
+          hours_per_day: formData.hoursPerDay,
+          night_shifts_per_month: formData.nightShiftsPerMonth,
+          night_shifts_other: formData.nightShiftsPerMonth === 'Others' ? formData.nightShiftsOther : null,
+          place_of_residence: formData.placeOfResidence,
+          residence_other: formData.placeOfResidence === 'Any other' ? formData.residenceOther : null,
+        })
+
+      if (demographicError) {
+        console.warn('Failed to save demographic survey:', demographicError)
+      }
+
       // Set the participant data to show on success page
       setParticipantData({
         participant_number: participants.participant_number,

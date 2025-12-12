@@ -122,12 +122,17 @@ const SuccessPage = ({ participantData }) => {
           <div className="border-t border-gray-200 pt-6">
             <h3 className="text-lg font-medium text-gray-900 mb-3">Next Steps</h3>
             {isInterventionGroup ? (
-              <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700">
-                <li>Save these credentials in a secure location (write them down or screenshot this page)</li>
-                <li>Download the App <a href="https://tinyurl.com/SHANTHIAPP2" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">here</a>.</li>
-                <li>Sign in using the participant number and password provided above</li>
-                <li>Use the app for relaxation and learning</li>
-              </ol>
+              <>
+                <p className="text-sm text-gray-700 mb-4 italic">
+                  It seems you could benefit from the SHANTHI APP. Download the app for daily calming support.
+                </p>
+                <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700">
+                  <li>Save these credentials in a secure location (write them down or screenshot this page)</li>
+                  <li>Download the App <a href="https://tinyurl.com/SHANTHIAPP2" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">here</a>.</li>
+                  <li>Sign in using the participant number and password provided above</li>
+                  <li>Use the app for relaxation and learning</li>
+                </ol>
+              </>
             ) : (
               <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700">
                 <li>Save your participant number in a secure location (write it down or screenshot this page)</li>

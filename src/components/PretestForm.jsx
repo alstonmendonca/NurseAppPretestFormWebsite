@@ -7,6 +7,26 @@ const PretestForm = ({ onSubmit, isSubmitting }) => {
     providesConsent: false,
     understandsVoluntary: false,
     
+    // Demographics Survey
+    sampleCode: '',
+    ageGroup: '',
+    gender: '',
+    maritalStatus: '',
+    educationalQualification: '',
+    educationalOther: '',
+    designation: '',
+    incomeLevel: '',
+    yearsExperience: '',
+    workingUnit: '',
+    workingUnitOther: '',
+    workShift: '',
+    hoursPerDay: '',
+    nightShiftsPerMonth: '',
+    nightShiftsOther: '',
+    placeOfResidence: '',
+    residenceOther: '',
+    nonSharingPledge: false,
+    
     // WHO-5 Well-Being Index (0-5 scale)
     who5_cheerful: '',
     who5_calm: '',
@@ -117,7 +137,7 @@ const PretestForm = ({ onSubmit, isSubmitting }) => {
               Pre-test Assessment
             </p>
             <div className="mt-4 text-xs text-gray-500 bg-gray-50 rounded-lg p-3">
-              • Estimated time: 5-8 minutes
+              • Estimated time: 10-15 minutes
             </div>
           </div>
         </div>
@@ -149,6 +169,377 @@ const PretestForm = ({ onSubmit, isSubmitting }) => {
                   <span className="text-sm sm:text-base text-gray-700 leading-relaxed">{item.label}</span>
                 </label>
               ))}
+            </div>
+          </div>
+
+          {/* Demographics Survey */}
+          <div className="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-gray-100">
+            <div className="flex items-center mb-4">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
+                Demographic Information
+              </h2>
+            </div>
+            <p className="text-sm text-gray-600 mb-6 bg-green-50 rounded-lg p-3">
+              Please provide your demographic details for research purposes.
+            </p>
+
+            <div className="space-y-6">
+              {/* Sample Code */}
+              <div>
+                <label htmlFor="sampleCode" className="block text-sm sm:text-base font-medium text-gray-700 mb-2">
+                  Sample code No <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="sampleCode"
+                  name="sampleCode"
+                  value={formData.sampleCode}
+                  onChange={handleInputChange}
+                  required
+                  placeholder="Enter your sample code"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+                />
+              </div>
+
+              {/* Age Group */}
+              <div>
+                <label className="block text-sm sm:text-base font-medium text-gray-700 mb-3">
+                  Age group <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-2">
+                  {['Less than 20 years', '20-30 years', '31-35 years', 'Above 35 years'].map((option) => (
+                    <label key={option} className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <input
+                        type="radio"
+                        name="ageGroup"
+                        value={option}
+                        checked={formData.ageGroup === option}
+                        onChange={handleInputChange}
+                        required
+                        className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300"
+                      />
+                      <span className="text-sm sm:text-base text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Gender */}
+              <div>
+                <label className="block text-sm sm:text-base font-medium text-gray-700 mb-3">
+                  Gender <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-2">
+                  {['Male', 'Female'].map((option) => (
+                    <label key={option} className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <input
+                        type="radio"
+                        name="gender"
+                        value={option}
+                        checked={formData.gender === option}
+                        onChange={handleInputChange}
+                        required
+                        className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300"
+                      />
+                      <span className="text-sm sm:text-base text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Marital Status */}
+              <div>
+                <label className="block text-sm sm:text-base font-medium text-gray-700 mb-3">
+                  Marital status <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-2">
+                  {['Unmarried/Single', 'Married', 'Widower/Separated/divorced'].map((option) => (
+                    <label key={option} className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <input
+                        type="radio"
+                        name="maritalStatus"
+                        value={option}
+                        checked={formData.maritalStatus === option}
+                        onChange={handleInputChange}
+                        required
+                        className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300"
+                      />
+                      <span className="text-sm sm:text-base text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Educational Qualification */}
+              <div>
+                <label className="block text-sm sm:text-base font-medium text-gray-700 mb-3">
+                  Educational qualification <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-2">
+                  {['Certificate course', 'Diploma', 'Graduate', 'Post Graduate', 'Others'].map((option) => (
+                    <label key={option} className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <input
+                        type="radio"
+                        name="educationalQualification"
+                        value={option}
+                        checked={formData.educationalQualification === option}
+                        onChange={handleInputChange}
+                        required
+                        className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300"
+                      />
+                      <span className="text-sm sm:text-base text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
+                {formData.educationalQualification === 'Others' && (
+                  <input
+                    type="text"
+                    name="educationalOther"
+                    value={formData.educationalOther}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Please specify"
+                    className="mt-3 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+                  />
+                )}
+              </div>
+
+              {/* Designation */}
+              <div>
+                <label className="block text-sm sm:text-base font-medium text-gray-700 mb-3">
+                  Designation <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-2">
+                  {['Ward In-charge', 'Staff Nurse', 'Nurse in probation', 'ANS'].map((option) => (
+                    <label key={option} className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <input
+                        type="radio"
+                        name="designation"
+                        value={option}
+                        checked={formData.designation === option}
+                        onChange={handleInputChange}
+                        required
+                        className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300"
+                      />
+                      <span className="text-sm sm:text-base text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Income Level */}
+              <div>
+                <label className="block text-sm sm:text-base font-medium text-gray-700 mb-3">
+                  Income level <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-2">
+                  {['Below Rs. 10,000', 'Rs.10,001-Rs.20,000', 'Rs.20,001-Rs.30,000', 'Above Rs.30,000'].map((option) => (
+                    <label key={option} className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <input
+                        type="radio"
+                        name="incomeLevel"
+                        value={option}
+                        checked={formData.incomeLevel === option}
+                        onChange={handleInputChange}
+                        required
+                        className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300"
+                      />
+                      <span className="text-sm sm:text-base text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Years of Experience */}
+              <div>
+                <label className="block text-sm sm:text-base font-medium text-gray-700 mb-3">
+                  Years of experience <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-2">
+                  {['Less than 5 years', '5 – 10 years', '10 - 15 years', 'Above 15 years'].map((option) => (
+                    <label key={option} className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <input
+                        type="radio"
+                        name="yearsExperience"
+                        value={option}
+                        checked={formData.yearsExperience === option}
+                        onChange={handleInputChange}
+                        required
+                        className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300"
+                      />
+                      <span className="text-sm sm:text-base text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Working Unit */}
+              <div>
+                <label className="block text-sm sm:text-base font-medium text-gray-700 mb-3">
+                  Working Unit <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-2">
+                  {['Medical ward', 'Surgical ward', 'Obstetrics & Gynecology', 'Pediatrics', 'Geriatric', 'Psychiatric', 'OT', 'Intensive care Units', 'Post-operative units', 'Any other'].map((option) => (
+                    <label key={option} className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <input
+                        type="radio"
+                        name="workingUnit"
+                        value={option}
+                        checked={formData.workingUnit === option}
+                        onChange={handleInputChange}
+                        required
+                        className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300"
+                      />
+                      <span className="text-sm sm:text-base text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
+                {formData.workingUnit === 'Any other' && (
+                  <input
+                    type="text"
+                    name="workingUnitOther"
+                    value={formData.workingUnitOther}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Please specify"
+                    className="mt-3 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+                  />
+                )}
+              </div>
+
+              {/* Work Shift */}
+              <div>
+                <label className="block text-sm sm:text-base font-medium text-gray-700 mb-3">
+                  Work shift <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-2">
+                  {['Fixed/Morning', 'Rotating'].map((option) => (
+                    <label key={option} className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <input
+                        type="radio"
+                        name="workShift"
+                        value={option}
+                        checked={formData.workShift === option}
+                        onChange={handleInputChange}
+                        required
+                        className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300"
+                      />
+                      <span className="text-sm sm:text-base text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Hours Per Day */}
+              <div>
+                <label className="block text-sm sm:text-base font-medium text-gray-700 mb-3">
+                  Hours worked per day <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-2">
+                  {['8 hours', '> 8 hours'].map((option) => (
+                    <label key={option} className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <input
+                        type="radio"
+                        name="hoursPerDay"
+                        value={option}
+                        checked={formData.hoursPerDay === option}
+                        onChange={handleInputChange}
+                        required
+                        className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300"
+                      />
+                      <span className="text-sm sm:text-base text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Night Shifts Per Month */}
+              <div>
+                <label className="block text-sm sm:text-base font-medium text-gray-700 mb-3">
+                  No. of night shifts per month <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-2">
+                  {['Weekly Once', '2 weeks once', 'Monthly Once', 'Others'].map((option) => (
+                    <label key={option} className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <input
+                        type="radio"
+                        name="nightShiftsPerMonth"
+                        value={option}
+                        checked={formData.nightShiftsPerMonth === option}
+                        onChange={handleInputChange}
+                        required
+                        className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300"
+                      />
+                      <span className="text-sm sm:text-base text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
+                {formData.nightShiftsPerMonth === 'Others' && (
+                  <input
+                    type="text"
+                    name="nightShiftsOther"
+                    value={formData.nightShiftsOther}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Please specify"
+                    className="mt-3 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+                  />
+                )}
+              </div>
+
+              {/* Place of Residence */}
+              <div>
+                <label className="block text-sm sm:text-base font-medium text-gray-700 mb-3">
+                  Place of Residence <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-2">
+                  {['Hostel in the Hospital Campus', 'Hostel in Outside Hospital Campus', 'Home', 'PG Hostel', 'Any other'].map((option) => (
+                    <label key={option} className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer">
+                      <input
+                        type="radio"
+                        name="placeOfResidence"
+                        value={option}
+                        checked={formData.placeOfResidence === option}
+                        onChange={handleInputChange}
+                        required
+                        className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300"
+                      />
+                      <span className="text-sm sm:text-base text-gray-700">{option}</span>
+                    </label>
+                  ))}
+                </div>
+                {formData.placeOfResidence === 'Any other' && (
+                  <input
+                    type="text"
+                    name="residenceOther"
+                    value={formData.residenceOther}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Please specify"
+                    className="mt-3 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+                  />
+                )}
+              </div>
+
+              {/* Non-Sharing Pledge */}
+              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <label className="flex items-start space-x-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="nonSharingPledge"
+                    checked={formData.nonSharingPledge}
+                    onChange={handleInputChange}
+                    required
+                    className="mt-1 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <div>
+                    <span className="text-sm sm:text-base text-gray-700 font-medium">Non-Sharing Pledge <span className="text-red-500">*</span></span>
+                    <p className="text-sm text-gray-600 mt-1">
+                      I agree that I will not share the mobile app access and login details with colleagues from other wards or study groups. I understand that sharing intervention details may affect the reliability of the study findings.
+                    </p>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
 
