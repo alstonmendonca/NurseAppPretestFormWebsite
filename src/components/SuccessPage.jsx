@@ -128,7 +128,7 @@ const SuccessPage = ({ participantData }) => {
                 </p>
                 <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700">
                   <li>Save these credentials in a secure location (write them down or screenshot this page)</li>
-                  <li>Download the App <a href="https://tinyurl.com/SHANTHIv3" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">here</a>.</li>
+                  <li>Download the App <a href="https://tinyurl.com/SHANTHIv4" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">here</a>.</li>
                   <li>Sign in using the participant number and password provided above</li>
                   <li>Use the app for relaxation and learning</li>
                 </ol>
