@@ -1,8 +1,30 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import html2canvas from 'html2canvas'
 
 const SuccessPage = ({ participantData }) => {
   const [copied, setCopied] = useState(false)
+  const [screenshotSaved, setScreenshotSaved] = useState(false)
+  const credentialsRef = useRef(null)
   const isInterventionGroup = participantData.group === 'Intervention'
+
+  const saveScreenshot = async () => {
+    if (credentialsRef.current) {
+      try {
+        const canvas = await html2canvas(credentialsRef.current, {
+          backgroundColor: '#ffffff',
+          scale: 2,
+        })
+        const link = document.createElement('a')
+        link.download = `credentials_${participantData.participant_number}.png`
+        link.href = canvas.toDataURL('image/png')
+        link.click()
+        setScreenshotSaved(true)
+        setTimeout(() => setScreenshotSaved(false), 3000)
+      } catch (error) {
+        console.error('Error saving screenshot:', error)
+      }
+    }
+  }
 
   const copyToClipboard = () => {
     const credentials = isInterventionGroup 
@@ -71,13 +93,16 @@ const SuccessPage = ({ participantData }) => {
             </div>
           )}
 
-          <div className="bg-gray-50 rounded-lg p-4 space-y-4">
+          <div ref={credentialsRef} className="bg-gray-50 rounded-lg p-4 space-y-4" style={{ backgroundColor: '#f9fafb' }}>
+            <div className="text-center pb-2 border-b border-gray-200 mb-2" style={{ borderColor: '#e5e7eb' }}>
+              <p className="text-xs text-gray-500 font-medium" style={{ color: '#6b7280' }}>YOUR CREDENTIALS</p>
+            </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1" style={{ color: '#374151' }}>
                 Participant Number
               </label>
-              <div className="flex items-center justify-between bg-white border border-gray-300 rounded-md px-3 py-2">
-                <span className="font-mono text-lg font-semibold text-gray-900">
+              <div className="flex items-center justify-between bg-white border border-gray-300 rounded-md px-3 py-2" style={{ backgroundColor: '#ffffff', borderColor: '#d1d5db' }}>
+                <span className="font-mono text-lg font-semibold text-gray-900" style={{ color: '#111827' }}>
                   {participantData.participant_number}
                 </span>
               </div>
@@ -85,17 +110,20 @@ const SuccessPage = ({ participantData }) => {
 
             {isInterventionGroup && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-1" style={{ color: '#374151' }}>
                   Password
                 </label>
-                <div className="flex items-center justify-between bg-white border border-gray-300 rounded-md px-3 py-2">
-                  <span className="font-mono text-lg font-semibold text-gray-900">
+                <div className="flex items-center justify-between bg-white border border-gray-300 rounded-md px-3 py-2" style={{ backgroundColor: '#ffffff', borderColor: '#d1d5db' }}>
+                  <span className="font-mono text-lg font-semibold text-gray-900" style={{ color: '#111827' }}>
                     {participantData.password}
                   </span>
                 </div>
               </div>
             )}
+          </div>
 
+          {/* Action Buttons */}
+          <div className="space-y-3">
             <button
               onClick={copyToClipboard}
               className="w-full bg-gray-600 text-white py-2 px-4 rounded-md font-medium hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
@@ -116,6 +144,27 @@ const SuccessPage = ({ participantData }) => {
                 </span>
               )}
             </button>
+
+            <button
+              onClick={saveScreenshot}
+              className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
+            >
+              {screenshotSaved ? (
+                <span className="flex items-center justify-center">
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                Screenshot Saved!
+              </span>
+            ) : (
+              <span className="flex items-center justify-center">
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                Save Credentials as Image
+              </span>
+            )}
+          </button>
           </div>
 
           {/* Instructions */}
