@@ -16,7 +16,7 @@ function App() {
       // First, get an unused participant record
       const { data: participants, error: fetchError } = await supabase
         .from('participants')
-        .select('participant_number, participant_password')
+        .select('participant_number, participant_password, Group')
         .eq('id_used', false)
         .limit(1)
         .single()
@@ -33,15 +33,11 @@ function App() {
         throw new Error('No available participant slots found. Please contact the administrator.')
       }
 
-      // Randomly assign participant to Intervention or Control group
-      const assignedGroup = Math.random() < 0.5 ? 'Intervention' : 'Control'
-
-      // Update the participant record to mark it as used and assign group
+      // Update the participant record to mark it as used
       const { error: updateError } = await supabase
         .from('participants')
         .update({ 
-          id_used: true,
-          Group: assignedGroup
+          id_used: true
         })
         .eq('participant_number', participants.participant_number)
 
@@ -145,7 +141,7 @@ function App() {
       setParticipantData({
         participant_number: participants.participant_number,
         password: participants.participant_password,
-        group: assignedGroup
+        group: participants.Group
       })
 
     } catch (err) {
