@@ -13,18 +13,37 @@ function App() {
     setError(null)
 
     try {
-      // First, get an unused participant record
+      // First, get count of available participants to pick a random one
+      const { count, error: countError } = await supabase
+        .from('participants')
+        .select('*', { count: 'exact', head: true })
+        .eq('id_used', false)
+
+      if (countError) {
+        console.error('Database count error:', countError)
+        throw new Error(`Database error: ${countError.message}`)
+      }
+
+      if (count === 0) {
+        throw new Error('No available participant slots found. Please contact the administrator.')
+      }
+
+      // Generate a random offset
+      const randomOffset = Math.floor(Math.random() * count)
+
+      // Get unused participant record at the random offset
       const { data: participants, error: fetchError } = await supabase
         .from('participants')
         .select('participant_number, participant_password, Group')
         .eq('id_used', false)
+        .range(randomOffset, randomOffset)
         .limit(1)
         .single()
 
       if (fetchError) {
         console.error('Database fetch error:', fetchError)
         if (fetchError.code === 'PGRST116') {
-          throw new Error('No available participant slots found. Please contact the administrator.')
+          throw new Error('Participant slot no longer available. Please try submitting again.')
         }
         throw new Error(`Database error: ${fetchError.message}`)
       }
